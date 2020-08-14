@@ -10,8 +10,9 @@ using namespace std;
 
 
 namespace CurrentThread{
-  __thread int t_cachedTid = 0;
-  __thread char t_tidString[32];
+  //__thread修饰的变量是线程局部存储的
+  __thread int t_cachedTid = 0; //线程真实pid(tid)缓存
+  __thread char t_tidString[32];// tid字符串表现形式
   __thread int t_tidStringLength = 6;
   __thread const char* t_threadName = "default"; 
 };
@@ -58,6 +59,8 @@ void* startThread(void* arg)
   return NULL;
 }
 
+atomic_int32_t Thread::numCreated_;
+
 Thread::Thread(const ThreadFunc& func, const string& name)
     :started_(false),
      joined_(false),
@@ -76,9 +79,10 @@ Thread::~Thread(){
 }
 
 void Thread::setDefaultName(){
+  int num = numCreated_++;
   if(name_.empty()){
     char buf[32];
-    snprintf(buf, sizeof(buf), "Thread");
+    snprintf(buf, sizeof(buf), "Thread%d", num);
     name_ = buf;
   }
 }

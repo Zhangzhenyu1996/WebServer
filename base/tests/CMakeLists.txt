@@ -1,2 +1,8 @@
 add_executable(Thread_test Thread_test.cpp)
 target_link_libraries(Thread_test base pthread)
+
+add_executable(CountDownLatch_test CountDownLatch_test.cpp)
+target_link_libraries(CountDownLatch_test base pthread)
+
+add_executable(CountDownLatch_test2 CountDownLatch_test2.cpp)
+target_link_libraries(CountDownLatch_test2 base pthread)

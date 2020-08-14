@@ -61,5 +61,5 @@ int main()
     t4.start();
     t4.join();
 
-    
+    printf("Thread nums:%d\n", Thread::numCreated());
 }

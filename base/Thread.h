@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <functional>
 #include <string>
+#include <atomic>
 #include "CountDownLatch.h"
 #include "noncopyable.h"
 using namespace std;
@@ -19,6 +20,7 @@ public:
     bool started() const {return started_;}
     pid_t tid() const {return tid_;}
     const string& name() const {return name_;}
+    static int numCreated() {return numCreated_;}
 private:
     void setDefaultName();
     bool started_;
@@ -28,6 +30,7 @@ private:
     ThreadFunc func_;
     string name_;
     CountDownLatch latch_;
+    static atomic_int32_t numCreated_;
 };
 
 #endif
