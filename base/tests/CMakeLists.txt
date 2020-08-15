@@ -6,3 +6,6 @@ target_link_libraries(CountDownLatch_test base pthread)
 
 add_executable(CountDownLatch_test2 CountDownLatch_test2.cpp)
 target_link_libraries(CountDownLatch_test2 base pthread)
+
+add_executable(ThreadPool_test ThreadPool_test.cpp)
+target_link_libraries(ThreadPool_test base pthread)

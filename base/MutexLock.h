@@ -14,6 +14,16 @@ public:
           assert(holder_ == 0);
           pthread_mutex_destroy(&mutex_);
         }
+        
+        bool isLockedByThisThread() const{
+              return holder_ == CurrentThread::tid();
+        }
+
+        void assertLocked() const {
+              assert(isLockedByThisThread());
+        }
+
+
         void lock() {
               pthread_mutex_lock(&mutex_);
               assignHolder();
